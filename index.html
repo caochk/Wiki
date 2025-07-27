@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>机器学习大道真解</title>
+  <title>机器学习炼丹决</title>
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web@1.7.0/style.min.css" rel="stylesheet">
   <style>
@@ -15,7 +15,100 @@
       padding: 0;
       min-height: 100vh;
       line-height: 2.1;
+      overflow-x: hidden;
+      position: relative;
+      /* 防止文本选择 */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
+    
+    /* 动态背景元素 */
+    .background-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .cloud {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      filter: blur(20px);
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
+    
+    .floating-rune {
+      position: absolute;
+      color: rgba(176, 58, 46, 0.3);
+      font-size: 24px;
+      animation: floatAndRotate 20s infinite linear;
+      opacity: 0.7;
+    }
+    
+    .mist {
+      position: absolute;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+      bottom: 0;
+      animation: mistFlow 10s infinite alternate;
+    }
+    
+    /* 动态水印样式 */
+    .watermark {
+      position: fixed;
+      pointer-events: none;
+      opacity: 0.05;
+      font-size: 24px;
+      color: #000;
+      z-index: 9999;
+      transform: rotate(-30deg);
+      animation: watermarkMove 20s infinite linear;
+    }
+    
+    @keyframes watermarkMove {
+      0% { transform: rotate(-30deg) translate(0, 0); }
+      25% { transform: rotate(-30deg) translate(100px, 100px); }
+      50% { transform: rotate(-30deg) translate(0, 200px); }
+      75% { transform: rotate(-30deg) translate(-100px, 100px); }
+      100% { transform: rotate(-30deg) translate(0, 0); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(20px, 10px); }
+      50% { transform: translate(0, 20px); }
+      75% { transform: translate(-20px, 10px); }
+    }
+    
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+    
+    @keyframes floatAndRotate {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+    
+    @keyframes mistFlow {
+      0% { transform: translateX(0); opacity: 0.5; }
+      100% { transform: translateX(100px); opacity: 0.8; }
+    }
+    
     .container {
       max-width: 900px;
       margin: 56px auto 32px auto;
@@ -26,6 +119,7 @@
       padding: 56px 38px 44px 38px;
       position: relative;
       overflow: hidden;
+      font-family: 'KaiTi', '楷体', 'STKaiti', '华文楷体', serif; /* 正文使用楷体 */
     }
     .container:before {
       content: '';
@@ -40,6 +134,9 @@
       box-shadow: 0 16px 48px rgba(44,62,80,0.13), 0 3px 12px rgba(44,62,80,0.10);
       border-color: #a68a5a;
     }
+    h1, h2, h3 {
+      font-family: 'LXGW WenKai Screen', 'ZCOOL XiaoWei', serif; /* 标题保持原有字体 */
+    }
     h1 {
       font-size: 2.8em;
       margin-bottom: 0.2em;
@@ -47,7 +144,6 @@
       text-align: center;
       letter-spacing: 0.2em;
       color: #3a3a2b;
-      font-family: 'LXGW WenKai Screen', 'ZCOOL XiaoWei', serif;
       position: relative;
       z-index: 1;
       display: inline-block;
@@ -70,7 +166,6 @@
     }
     h2, h3 {
       color: #2d5c3a;
-      font-family: 'LXGW WenKai Screen', 'ZCOOL XiaoWei', serif;
       font-weight: bold;
       letter-spacing: 0.1em;
     }
@@ -93,6 +188,7 @@
       padding: 2px 6px;
       font-size: 0.98em;
       color: #b68900;
+      font-family: 'KaiTi', '楷体', 'STKaiti', '华文楷体', monospace; /* 代码块也使用楷体 */
     }
     hr {
       border: none;
@@ -116,11 +212,68 @@
         font-size: 1.3em;
       }
     }
+
+    /* 鼠标特效样式 */
+    .cursor-effect {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+
+    .bamboo-leaf {
+      position: absolute;
+      width: 12px;
+      height: 20px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 20"><path d="M6 0 Q12 5 6 20 Q0 5 6 0 Z" fill="%232d5c3a"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.7;
+      z-index: 9998;
+    }
+
+    .click-effect {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #2d5c3a;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: clickAnimation 0.6s ease-out forwards;
+      z-index: 9997;
+    }
+
+    @keyframes clickAnimation {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+      }
+    }
+
+    .trail-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: #2d5c3a;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.7;
+      z-index: 9996;
+    }
   </style>
 </head>
 <body>
+  <!-- 动态背景元素 -->
+  <div class="background-elements" id="backgroundElements"></div>
+  
   <div class="container">
-    <h1>机器学习大道真解 <span class="seal">真解</span></h1>
+    <h1>机器学习炼丹决（误） <span class="seal">练气小修所撰</span></h1>
     <h2>序章：天道之始，万物皆数</h2>
     <p>天地不仁，以万物为刍狗。然大道五十，天衍四九，人遁其一。我辈修士，观天之道，执天之行，方能窥得那一线生机。这机器学习，便是效法天道，以海量“天材地宝”（数据）为炉，以“算法模型”为丹方，燃“算力”之火，炼制“神丹”（AI模型）之术。</p>
     <p>此道修行，境界分明，从炼气、筑基，到结丹、元婴，乃至化神、渡劫，每一步都暗合天道至理。</p>
@@ -191,5 +344,297 @@
     <h3>筑基小结：</h3>
     <p>筑基期的你，不再是盲目地重复师尊的教诲。你需要像一位真正的丹师，根据丹炉的品阶（硬件性能）、药材的特性（数据质量），谨慎地设定你的“真火强度”、“添柴节奏”与“淬炼次数”。这个过程，没有固定的法门，唯有不断地尝试、记录与感悟，方能寻得最适合你自己的“炼丹大道”。这在凡间被称为“调参侠”的日常。</p>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let mouseX = 0;
+      let mouseY = 0;
+      let trail = [];
+      const trailLength = 10;
+      
+      // 创建动态水印
+      function createWatermark() {
+        const watermarkText = "炼丹决";
+        for (let i = 0; i < 20; i++) {
+          const watermark = document.createElement('div');
+          watermark.className = 'watermark';
+          watermark.textContent = watermarkText;
+          watermark.style.left = `${(i % 5) * 20}%`;
+          watermark.style.top = `${Math.floor(i / 5) * 20}%`;
+          watermark.style.animationDelay = `${i * 2}s`;
+          document.body.appendChild(watermark);
+        }
+      }
+      
+      // 定时清空剪贴板
+      // function clearClipboard() {
+      //   setInterval(() => {
+      //     // 尝试清空剪贴板
+      //     try {
+      //       navigator.clipboard.writeText('');
+      //     } catch (e) {
+      //       // 忽略错误
+      //     }
+      //   }, 3000); // 每3秒清空一次
+      // }
+      
+      // 禁用拖拽功能
+      document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // 禁用选择功能
+      document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // 禁用拖拽事件
+      document.addEventListener('drag', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // 禁用拖放事件
+      document.addEventListener('drop', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // 禁用右键菜单
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // 禁用文本选择的键盘快捷键
+      document.addEventListener('keydown', function(e) {
+        // 禁用 Ctrl+A 全选
+        if (e.ctrlKey && e.key === 'a') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Ctrl+C 复制
+        if (e.ctrlKey && e.key === 'c') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Ctrl+X 剪切
+        if (e.ctrlKey && e.key === 'x') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Ctrl+V 粘贴（虽然不是复制，但为了完整性）
+        if (e.ctrlKey && e.key === 'v') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Ctrl+S 保存
+        if (e.ctrlKey && e.key === 's') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Ctrl+U 查看源代码
+        if (e.ctrlKey && e.key === 'u') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 F12 开发者工具
+        if (e.key === 'F12') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Ctrl+Shift+I 开发者工具
+        if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Ctrl+Shift+J 开发者工具
+        if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Ctrl+Shift+C 开发者工具
+        if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+          e.preventDefault();
+          return false;
+        }
+        // 禁用 Print Screen 截图
+        if (e.key === 'PrintScreen') {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // 检测开发者工具
+      let devtools = {
+        open: false,
+        orientation: null
+      };
+      
+      const threshold = 160;
+      
+      setInterval(() => {
+        if (window.outerHeight - window.innerHeight > threshold || 
+            window.outerWidth - window.innerWidth > threshold) {
+          if (!devtools.open) {
+            devtools.open = true;
+            // 可以在这里添加检测到开发者工具时的处理逻辑
+            // 例如：关闭页面、重定向等
+            // window.location.replace('about:blank');
+          }
+        } else {
+          devtools.open = false;
+        }
+      }, 500);
+      
+      // 创建动态背景元素
+      function createBackgroundElements() {
+        const backgroundContainer = document.getElementById('backgroundElements');
+        
+        // 创建浮动云朵
+        for (let i = 0; i < 5; i++) {
+          const cloud = document.createElement('div');
+          cloud.className = 'cloud';
+          cloud.style.width = `${Math.random() * 200 + 100}px`;
+          cloud.style.height = `${Math.random() * 80 + 40}px`;
+          cloud.style.left = `${Math.random() * 100}%`;
+          cloud.style.top = `${Math.random() * 100}%`;
+          cloud.style.animationDelay = `${Math.random() * 5}s`;
+          backgroundContainer.appendChild(cloud);
+        }
+        
+        // 创建闪烁星星
+        for (let i = 0; i < 20; i++) {
+          const star = document.createElement('div');
+          star.className = 'star';
+          star.style.width = `${Math.random() * 3 + 1}px`;
+          star.style.height = star.style.width;
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 100}%`;
+          star.style.animationDelay = `${Math.random() * 3}s`;
+          backgroundContainer.appendChild(star);
+        }
+        
+        // 创建浮动符文
+        const runes = ['☯', '太极', '无极', '乾坤', '阴阳', '五行'];
+        for (let i = 0; i < 8; i++) {
+          const rune = document.createElement('div');
+          rune.className = 'floating-rune';
+          rune.textContent = runes[Math.floor(Math.random() * runes.length)];
+          rune.style.left = `${Math.random() * 100}%`;
+          rune.style.top = `${Math.random() * 100 + 100}%`;
+          rune.style.animationDuration = `${Math.random() * 20 + 20}s`;
+          backgroundContainer.appendChild(rune);
+        }
+        
+        // 创建底部雾气
+        const mist = document.createElement('div');
+        mist.className = 'mist';
+        backgroundContainer.appendChild(mist);
+      }
+      
+      // 创建竹叶飘落效果
+      function createBambooLeaves() {
+        setInterval(() => {
+          const leaf = document.createElement('div');
+          leaf.className = 'bamboo-leaf';
+          leaf.style.left = `${Math.random() * window.innerWidth}px`;
+          leaf.style.top = '-20px';
+          leaf.style.opacity = Math.random() * 0.5 + 0.3;
+          leaf.style.transform = `scale(${Math.random() * 0.5 + 0.5}) rotate(${Math.random() * 360}deg)`;
+          document.body.appendChild(leaf);
+          
+          // 添加动画
+          const animation = leaf.animate([
+            { transform: `translateY(0) rotate(0deg)`, opacity: leaf.style.opacity },
+            { 
+              transform: `translateY(${window.innerHeight + 50}px) rotate(${Math.random() * 360}deg)`,
+              opacity: 0 
+            }
+          ], {
+            duration: Math.random() * 5000 + 5000,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          });
+          
+          // 动画结束后移除元素
+          animation.onfinish = () => {
+            leaf.remove();
+          };
+        }, 800);
+      }
+      
+      // 鼠标移动追踪
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // 创建拖尾效果
+        const trailDot = document.createElement('div');
+        trailDot.className = 'trail-dot';
+        trailDot.style.left = `${mouseX}px`;
+        trailDot.style.top = `${mouseY}px`;
+        document.body.appendChild(trailDot);
+        
+        // 保存到轨迹数组
+        trail.push({
+          element: trailDot,
+          x: mouseX,
+          y: mouseY,
+          life: 20
+        });
+        
+        // 移除过期的轨迹点
+        if (trail.length > trailLength) {
+          const oldDot = trail.shift();
+          if (oldDot.element.parentNode) {
+            oldDot.element.parentNode.removeChild(oldDot.element);
+          }
+        }
+        
+        // 更新轨迹点透明度
+        trail.forEach((dot, index) => {
+          dot.life--;
+          const opacity = dot.life / 20;
+          dot.element.style.opacity = opacity;
+        });
+      });
+      
+      // 鼠标点击效果
+      document.addEventListener('click', function(e) {
+        const clickEffect = document.createElement('div');
+        clickEffect.className = 'click-effect';
+        clickEffect.style.left = `${e.clientX}px`;
+        clickEffect.style.top = `${e.clientY}px`;
+        document.body.appendChild(clickEffect);
+        
+        // 动画结束后移除元素
+        setTimeout(() => {
+          if (clickEffect.parentNode) {
+            clickEffect.parentNode.removeChild(clickEffect);
+          }
+        }, 600);
+      });
+      
+      // 启动所有功能
+      createWatermark();
+      createBackgroundElements();
+      createBambooLeaves();
+      clearClipboard();
+      
+      // 定期清理不需要的元素
+      setInterval(() => {
+        const dots = document.querySelectorAll('.trail-dot');
+        dots.forEach(dot => {
+          if (parseFloat(dot.style.opacity) <= 0) {
+            if (dot.parentNode) {
+              dot.parentNode.removeChild(dot);
+            }
+          }
+        });
+      }, 1000);
+    });
+  </script>
 </body>
 </html>
