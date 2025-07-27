@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>机器学习大道真解</title>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web@1.7.0/style.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'LXGW WenKai Screen', 'ZCOOL XiaoWei', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif;
+      background: #f6f1e7 url('https://cdn.jsdelivr.net/gh/jasonkayzk/pic-repo/misc/xuan-paper-2.webp') repeat;
+      color: #2d2d2d;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      line-height: 2.1;
+    }
+    .container {
+      max-width: 900px;
+      margin: 56px auto 32px auto;
+      background: rgba(255,255,255,0.92);
+      border-radius: 18px 18px 24px 24px;
+      border: 2.5px solid #bfa97a;
+      box-shadow: 0 8px 32px rgba(44,62,80,0.10), 0 1.5px 6px rgba(44,62,80,0.06);
+      padding: 56px 38px 44px 38px;
+      position: relative;
+      overflow: hidden;
+    }
+    .container:before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background: url('https://cdn.jsdelivr.net/gh/jasonkayzk/pic-repo/misc/ink-smoke-2.png') left bottom no-repeat;
+      background-size: 60% auto;
+      opacity: 0.13;
+      pointer-events: none;
+    }
+    .container:hover {
+      box-shadow: 0 16px 48px rgba(44,62,80,0.13), 0 3px 12px rgba(44,62,80,0.10);
+      border-color: #a68a5a;
+    }
+    h1 {
+      font-size: 2.8em;
+      margin-bottom: 0.2em;
+      margin-top: 0;
+      text-align: center;
+      letter-spacing: 0.2em;
+      color: #3a3a2b;
+      font-family: 'LXGW WenKai Screen', 'ZCOOL XiaoWei', serif;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      width: 100%;
+    }
+    .seal {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 18px;
+      font-size: 0.45em;
+      color: #fff;
+      background: #b03a2e;
+      border-radius: 6px;
+      padding: 0.18em 0.7em 0.12em 0.7em;
+      font-family: 'ZCOOL XiaoWei', serif;
+      letter-spacing: 0.2em;
+      box-shadow: 1px 2px 6px rgba(176,58,46,0.13);
+      border: 2px solid #a62c1a;
+      transform: rotate(-7deg);
+    }
+    h2, h3 {
+      color: #2d5c3a;
+      font-family: 'LXGW WenKai Screen', 'ZCOOL XiaoWei', serif;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+    }
+    h2 {
+      font-size: 1.5em;
+      margin-top: 2.2em;
+      margin-bottom: 0.7em;
+      border-left: 6px solid #bfa97a;
+      padding-left: 0.6em;
+      background: linear-gradient(90deg, #f6e9d7 80%, #f6f1e7 100%);
+    }
+    h3 {
+      font-size: 1.13em;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    code, pre {
+      background: #f7f2e3;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.98em;
+      color: #b68900;
+    }
+    hr {
+      border: none;
+      border-top: 2px dashed #bfa97a;
+      margin: 2.2em 0;
+    }
+    ul, ol {
+      margin-left: 1.5em;
+    }
+    strong {
+      color: #a62c1a;
+    }
+    em {
+      color: #2d5c3a;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px 2px;
+      }
+      h1 {
+        font-size: 1.3em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>机器学习大道真解 <span class="seal">真解</span></h1>
+    <h2>序章：天道之始，万物皆数</h2>
+    <p>天地不仁，以万物为刍狗。然大道五十，天衍四九，人遁其一。我辈修士，观天之道，执天之行，方能窥得那一线生机。这机器学习，便是效法天道，以海量“天材地宝”（数据）为炉，以“算法模型”为丹方，燃“算力”之火，炼制“神丹”（AI模型）之术。</p>
+    <p>此道修行，境界分明，从炼气、筑基，到结丹、元婴，乃至化神、渡劫，每一步都暗合天道至理。</p>
+    <hr>
+    <h2>第一卷：炼气篇——有监督微调</h2>
+    <h3>境界：炼气期</h3>
+    <strong>心法总纲：</strong> 凡人初入仙途，需引气入体，打通经脉。这“有监督微调”（Supervised Fine-tuning），便是尔等踏入机器学习大道的第一步。此时的你，如同一位刚刚获得丹方的炼丹学徒，虽有前人栽树，但仍需亲手实践，方能炼制出属于自己的第一枚丹药。
+    <h3>何为“有监督微调”？</h3>
+    <p>所谓“有监督”，便如师尊在一旁耳提面命，亲身示范。你手中已有一部《百草纲目》（<strong>预训练模型</strong>），此乃前代大能耗费无数心血，遍尝万千灵草（海量无标签数据）总结出的通用药理。但这《纲目》过于宽泛，若要炼制针对特定顽疾的“特效丹”，则需在此基础上精进。</p>
+    <p>此时，你需要一本《名师丹方》（<strong>有监督微调数据集</strong>）。这丹方上不仅记载了所需的“天材地宝”（<strong>输入数据/Input</strong>），更明确标注了每味药材的君臣佐使、分量火候，最终要炼成何种丹药（<strong>标签/Label</strong>）。</p>
+    <p>你的任务，便是严格遵循这本《名师丹方》，一遍遍地演练。每炼制一炉，便与丹方上的“成丹标准”进行比对。若药性猛了，便调整火候；若药力弱了，便增减药材。这个比对、修正的过程，在修行界称之为<strong>计算损失（Loss）</strong>，并通过<strong>反向传播（Backpropagation）</strong>之法，将误差的“神念”传回丹炉各处，微调你的炼丹法诀。</p>
+    <h3>举个例子：</h3>
+    <ol>
+      <li><strong>《百草纲目》/预训练模型：</strong> 你得到了一位大能留下的“万兽图谱”，此图谱能识别万物轮廓，但对“猫”这一特定物种，识别尚有不足。</li>
+      <li><strong>《名师丹方》/有监督微调数据集：</strong> 你寻来一本《天下名猫录》，里面有十万张猫妖的画像（输入），每一张都明确标注了“此乃狸花猫”、“此乃布偶猫”等（标签）。</li>
+      <li><strong>炼丹过程：</strong> 你将《天下名猫录》中的画像一张张“喂”给你的“万兽图谱”去看。起初，它可能会指着一只狸花猫说：“此乃虎妖！”</li>
+      <li><strong>计算损失与反向传播：</strong> 你立刻纠正：“错！此乃狸花猫！” 这个“纠错”的过程，便是在计算“现实”与“模型认知”间的差距。模型会根据你的指正，微调内部的“认知经络”，下一次看到类似的画像时，便会更倾向于识别为“猫”。</li>
+    </ol>
+    <p>周而复始，待你将这本《天下名猫录》烂熟于心，你的“万兽图谱”便成功进化为“识猫神鉴”，此乃炼气小成之兆。</p>
+    <hr>
+    <h2>第二卷：筑基篇——训练超参之法</h2>
+    <h3>境界：筑基期</h3>
+    <strong>心法总纲：</strong> 炼气之后，需筑牢道基，方能承载更强的真元。若说“有监督微调”是让你学会了照方抓药，那掌握“训练超参”（Hyperparameters）的奥秘，便是让你从一名炼丹学徒，晋升为能独立掌控丹炉火候的炼丹师。
+    <p>超参，乃是丹方之外的“心法秘诀”，是无法通过修炼（训练）自行领悟的。它们是你在炼丹之前，就需要设定好的“天地法则”。不同的超参组合，可能炼出天差地别的丹药，轻则丹毁炉灭，重则走火入魔。</p>
+    <h3>常见的超参秘诀：</h3>
+    <ol>
+      <li><strong>学习率（Learning Rate）—— 真火调控之术</strong>
+        <ul>
+          <li><strong>喻义：</strong> 炼丹时，你催动真火的强度。</li>
+          <li><strong>法诀：</strong> 学习率决定了你根据每次“炼丹失误”（Loss）进行“法诀修正”（参数更新）的幅度。</li>
+          <li><strong>过犹不及：</strong>
+            <ul>
+              <li><strong>火候过猛（学习率过高）：</strong> 修正幅度太大，可能一步跨过了最佳的“药性平衡点”，导致丹药品质在好坏之间剧烈震荡，迟迟无法稳定，最终炸炉。在数学上，这被称为在最优解两侧来回“横跳”，无法收敛。</li>
+              <li><strong>火候过微（学习率过低）：</strong> 修正幅度太小，炼制一炉丹药耗时百年，效率低下。而且容易陷入“局部最优”的假丹境界，以为炼成了神丹，实则只是药性尚可的次品。</li>
+            </ul>
+          </li>
+          <li><strong>参考公式（梯度下降法核心思想）：</strong>
+            <pre>新参数 = 旧参数 - 学习率 × 损失函数的梯度</pre>
+            此处的“梯度”指引了让损失变小的最快方向，而“学习率”则是你朝着这个方向迈出多大一步。
+          </li>
+        </ul>
+      </li>
+      <li><strong>批次大小（Batch Size）—— 添柴战术</strong>
+        <ul>
+          <li><strong>喻义：</strong> 你一次性往丹炉里投入多少份“天材地宝”进行熔炼。</li>
+          <li><strong>法诀：</strong> 整个《名师丹方》（训练集）可能包含数万份药材。你不可能一次性全部丢进去，而是分批次投入。</li>
+          <li><strong>权衡之道：</strong>
+            <ul>
+              <li><strong>单次量大（Batch Size大）：</strong> 每次投入百斤药材，对药性的判断会更稳定、更接近整体药理（梯度方向更准确），但对你的神念（内存）消耗巨大，且可能“消化不良”，陷入平庸的药性组合中。</li>
+              <li><strong>单次量小（Batch Size小）：</strong> 每次只投一株灵草，虽然神念消耗小，但容易被单株灵草的特异性带偏（梯度方向震荡剧烈），炼丹过程很不稳定。不过，这种“不稳定”有时也能帮你跳出“假丹”境界，寻得真正的神丹配比。</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>训练轮次（Epochs）—— 淬炼次数</strong>
+        <ul>
+          <li><strong>喻义：</strong> 将整本《名师丹方》中的所有药材，完整地、分批次地炼制一遍，算作一轮“淬炼”。</li>
+          <li><strong>法诀：</strong> 决定了你的丹药需要经历多少次完整的煅烧与提纯。</li>
+          <li><strong>过犹不及：</strong>
+            <ul>
+              <li><strong>淬炼不足（Epochs少）：</strong> 药材还未完全熔炼，药性驳杂不纯，丹未成形。在机器学习中，称为<strong>欠拟合（Underfitting）</strong>。</li>
+              <li><strong>淬炼过度（Epochs多）：</strong> 反复煅烧，将丹方上的药理记得“过于死板”，甚至连丹方上的一点笔误都学了进去。这枚丹药对于丹方上的病症药到病除，但遇到丹方外稍有变化的病症，便毫无用处。此乃<strong>过拟合（Overfitting）</strong>，是炼丹大忌。</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+    <h3>筑基小结：</h3>
+    <p>筑基期的你，不再是盲目地重复师尊的教诲。你需要像一位真正的丹师，根据丹炉的品阶（硬件性能）、药材的特性（数据质量），谨慎地设定你的“真火强度”、“添柴节奏”与“淬炼次数”。这个过程，没有固定的法门，唯有不断地尝试、记录与感悟，方能寻得最适合你自己的“炼丹大道”。这在凡间被称为“调参侠”的日常。</p>
+  </div>
+</body>
+</html>
