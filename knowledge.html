@@ -147,42 +147,6 @@
       background: rgba(191, 169, 122, 0.5);
     }
     
-    /* 添加个人信息区域样式 */
-    .profile {
-      text-align: center;
-      margin: 30px 0;
-      padding: 20px;
-      background: rgba(246, 241, 231, 0.7);
-      border-radius: 10px;
-      border: 1px solid #bfa97a;
-    }
-    
-    .profile img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #bfa97a;
-      margin-bottom: 15px;
-    }
-    
-    .profile h2 {
-      color: #3a3a2b;
-      margin-bottom: 10px;
-      font-size: 1.8em;
-      border: none;
-      padding: 0;
-      background: none;
-      margin-top: 0;
-    }
-    
-    .profile p {
-      color: #2d2d2d;
-      font-size: 1.1em;
-      max-width: 600px;
-      margin: 10px auto;
-    }
-    
     .container {
       max-width: 900px;
       margin: 120px auto 32px auto; /* 为导航栏留出空间 */
@@ -353,6 +317,19 @@
     section {
       scroll-margin-top: 100px;
     }
+    
+    /* 返回首页链接 */
+    .back-home {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2d5c3a;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .back-home:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -362,33 +339,103 @@
   <!-- 添加导航栏 -->
   <nav>
     <ul>
-      <li><a href="#home">首页</a></li>
-      <li><a href="#about">关于我</a></li>
-      <li><a href="knowledge.html">知识库</a></li>
+      <li><a href="index.html#home">首页</a></li>
+      <li><a href="index.html#about">关于我</a></li>
+      <li><a href="#knowledge">知识库</a></li>
     </ul>
   </nav>
   
   <div class="container">
-    <!-- 首页内容 -->
-    <section id="home">
-      <div class="profile">
-        <h2>炼气小修的知识库</h2>
-        <p>欢迎来到我的个人空间，和小修一起探索开发与算法的修仙世界！</p>
-      </div>
-    </section>
-    
-    <!-- 关于我和联系我合并部分 -->
-    <section id="about">
-      <h2>关于我</h2>
-      <p>我是炼气小修，一个热爱技术与分享的人。在这个知识库中，我会分享自己的学习笔记、项目经验和一些有趣的思考。</p>
-      <p>希望通过这种方式，能够与更多志同道合的朋友交流，共同进步。</p>
+    <!-- 知识库 -->
+    <section id="knowledge">
+      <a href="index.html" class="back-home">&larr; 返回首页</a>
       
-      <h3>联系我</h3>
-      <p>如果你对我的分享感兴趣，或者有任何问题和建议，欢迎通过以下方式联系我：</p>
+      <h2>我的知识库</h2>
+      <p>这里包含我在技术学习过程中整理的各种笔记和心得</p>
+      
+      <!-- 机器学习炼丹决 -->
+      <h3 id="ml-alchemy">机器学习炼丹决</h3>
+      <h1>机器学习炼丹决（误） <span class="seal">炼气小修所撰</span></h1>
+      <h2>序章：天道之始，万物皆数</h2>
+      <p>天地不仁，以万物为刍狗。然大道五十，天衍四九，人遁其一。我辈修士，观天之道，执天之行，方能窥得那一线生机。这机器学习，便是效法天道，以海量"天材地宝"（数据）为炉，以"算法模型"为丹方，燃"算力"之火，炼制"神丹"（AI模型）之术。</p>
+      <p>此道修行，境界分明，从炼气、筑基，到结丹、元婴，乃至化神、渡劫，每一步都暗合天道至理。</p>
+      <hr>
+      <h2>第一卷：炼气篇——有监督微调</h2>
+      <h3>境界：炼气期</h3>
+      <strong>心法总纲：</strong> 凡人初入仙途，需引气入体，打通经脉。这"有监督微调"（Supervised Fine-tuning），便是尔等踏入机器学习大道的第一步。此时的你，如同一位刚刚获得丹方的炼丹学徒，虽有前人栽树，但仍需亲手实践，方能炼制出属于自己的第一枚丹药。
+      <h3>何为"有监督微调"？</h3>
+      <p>所谓"有监督"，便如师尊在一旁耳提面命，亲身示范。你手中已有一部《百草纲目》（<strong>预训练模型</strong>），此乃前代大能耗费无数心血，遍尝万千灵草（海量无标签数据）总结出的通用药理。但这《纲目》过于宽泛，若要炼制针对特定顽疾的"特效丹"，则需在此基础上精进。</p>
+      <p>此时，你需要一本《名师丹方》（<strong>有监督微调数据集</strong>）。这丹方上不仅记载了所需的"天材地宝"（<strong>输入数据/Input</strong>），更明确标注了每味药材的君臣佐使、分量火候，最终要炼成何种丹药（<strong>标签/Label</strong>）。</p>
+      <p>你的任务，便是严格遵循这本《名师丹方》，一遍遍地演练。每炼制一炉，便与丹方上的"成丹标准"进行比对。若药性猛了，便调整火候；若药力弱了，便增减药材。这个比对、修正的过程，在修行界称之为<strong>计算损失（Loss）</strong>，并通过<strong>反向传播（Backpropagation）</strong>之法，将误差的"神念"传回丹炉各处，微调你的炼丹法诀。</p>
+      <h3>举个例子：</h3>
+      <ol>
+        <li><strong>《百草纲目》/预训练模型：</strong> 你得到了一位大能留下的"万兽图谱"，此图谱能识别万物轮廓，但对"猫"这一特定物种，识别尚有不足。</li>
+        <li><strong>《名师丹方》/有监督微调数据集：</strong> 你寻来一本《天下名猫录》，里面有十万张猫妖的画像（输入），每一张都明确标注了"此乃狸花猫"、"此乃布偶猫"等（标签）。</li>
+        <li><strong>炼丹过程：</strong> 你将《天下名猫录》中的画像一张张"喂"给你的"万兽图谱"去看。起初，它可能会指着一只狸花猫说："此乃虎妖！"</li>
+        <li><strong>计算损失与反向传播：</strong> 你立刻纠正："错！此乃狸花猫！" 这个"纠错"的过程，便是在计算"现实"与"模型认知"间的差距。模型会根据你的指正，微调内部的"认知经络"，下一次看到类似的画像时，便会更倾向于识别为"猫"。</li>
+      </ol>
+      <p>周而复始，待你将这本《天下名猫录》烂熟于心，你的"万兽图谱"便成功进化为"识猫神鉴"，此乃炼气小成之兆。</p>
+      <hr>
+      <h2>第二卷：筑基篇——训练超参之法</h2>
+      <h3>境界：筑基期</h3>
+      <strong>心法总纲：</strong> 炼气之后，需筑牢道基，方能承载更强的真元。若说"有监督微调"是让你学会了照方抓药，那掌握"训练超参"（Hyperparameters）的奥秘，便是让你从一名炼丹学徒，晋升为能独立掌控丹炉火候的炼丹师。
+      <p>超参，乃是丹方之外的"心法秘诀"，是无法通过修炼（训练）自行领悟的。它们是你在炼丹之前，就需要设定好的"天地法则"。不同的超参组合，可能炼出天差地别的丹药，轻则丹毁炉灭，重则走火入魔。</p>
+      <h3>常见的超参秘诀：</h3>
+      <ol>
+        <li><strong>学习率（Learning Rate）—— 真火调控之术</strong>
+          <ul>
+            <li><strong>喻义：</strong> 炼丹时，你催动真火的强度。</li>
+            <li><strong>法诀：</strong> 学习率决定了你根据每次"炼丹失误"（Loss）进行"法诀修正"（参数更新）的幅度。</li>
+            <li><strong>过犹不及：</strong>
+              <ul>
+                <li><strong>火候过猛（学习率过高）：</strong> 修正幅度太大，可能一步跨过了最佳的"药性平衡点"，导致丹药品质在好坏之间剧烈震荡，迟迟无法稳定，最终炸炉。在数学上，这被称为在最优解两侧来回"横跳"，无法收敛。</li>
+                <li><strong>火候过微（学习率过低）：</strong> 修正幅度太小，炼制一炉丹药耗时百年，效率低下。而且容易陷入"局部最优"的假丹境界，以为炼成了神丹，实则只是药性尚可的次品。</li>
+              </ul>
+            </li>
+            <li><strong>参考公式（梯度下降法核心思想）：</strong>
+              <pre>新参数 = 旧参数 - 学习率 × 损失函数的梯度</pre>
+              此处的"梯度"指引了让损失变小的最快方向，而"学习率"则是你朝着这个方向迈出多大一步。
+            </li>
+          </ul>
+        </li>
+        <li><strong>批次大小（Batch Size）—— 添柴战术</strong>
+          <ul>
+            <li><strong>喻义：</strong> 你一次性往丹炉里投入多少份"天材地宝"进行熔炼。</li>
+            <li><strong>法诀：</strong> 整个《名师丹方》（训练集）可能包含数万份药材。你不可能一次性全部丢进去，而是分批次投入。</li>
+            <li><strong>权衡之道：</strong>
+              <ul>
+                <li><strong>单次量大（Batch Size大）：</strong> 每次投入百斤药材，对药性的判断会更稳定、更接近整体药理（梯度方向更准确），但对你的神念（内存）消耗巨大，且可能"消化不良"，陷入平庸的药性组合中。</li>
+                <li><strong>单次量小（Batch Size小）：</strong> 每次只投一株灵草，虽然神念消耗小，但容易被单株灵草的特异性带偏（梯度方向震荡剧烈），炼丹过程很不稳定。不过，这种"不稳定"有时也能帮你跳出"假丹"境界，寻得真正的神丹配比。</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><strong>训练轮次（Epochs）—— 淬炼次数</strong>
+          <ul>
+            <li><strong>喻义：</strong> 将整本《名师丹方》中的所有药材，完整地、分批次地炼制一遍，算作一轮"淬炼"。</li>
+            <li><strong>法诀：</strong> 决定了你的丹药需要经历多少次完整的煅烧与提纯。</li>
+            <li><strong>过犹不及：</strong>
+              <ul>
+                <li><strong>淬炼不足（Epochs少）：</strong> 药材还未完全熔炼，药性驳杂不纯，丹未成形。在机器学习中，称为<strong>欠拟合（Underfitting）</strong>。</li>
+                <li><strong>淬炼过度（Epochs多）：</strong> 反复煅烧，将丹方上的药理记得"过于死板"，甚至连丹方上的一点笔误都学了进去。这枚丹药对于丹方上的病症药到病除，但遇到丹方外稍有变化的病症，便毫无用处。此乃<strong>过拟合（Overfitting）</strong>，是炼丹大忌。</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+      <h3>筑基小结：</h3>
+      <p>筑基期的你，不再是盲目地重复师尊的教诲。你需要像一位真正的丹师，根据丹炉的品阶（硬件性能）、药材的特性（数据质量），谨慎地设定你的"真火强度"、"添柴节奏"与"淬炼次数"。这个过程，没有固定的法门，唯有不断地尝试、记录与感悟，方能寻得最适合你自己的"炼丹大道"。这在凡间被称为"调参侠"的日常。</p>
+      
+      <!-- 其他技术知识 -->
+      <h3 id="other-knowledge">其他技术笔记</h3>
+      <!-- <p>除了机器学习相关内容外，我还整理了以下技术领域的笔记：</p>
       <ul>
-        <li>GitHub: <a href="https://github.com/caochk" target="_blank">炼气小修</a></li>
-        <li>Email: <a href="mailto:caochk@gmail.com">给炼器小修发送传音符</a></li>
-      </ul>
+        <li>编程语言（Python, JavaScript, Go等）</li>
+        <li>Web开发技术</li>
+        <li>系统架构与设计模式</li>
+        <li>开源项目贡献经验</li>
+      </ul> -->
+      <p>（内容正在整理中，敬请期待）</p>
     </section>
   </div>
 
@@ -665,7 +712,7 @@
       });
       
       // 添加导航链接平滑滚动
-      document.querySelectorAll('nav a').forEach(anchor => {
+      document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
           
