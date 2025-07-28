@@ -1,2 +1,2 @@
-# jason.github.io
+# Wiki
 share everything i like
