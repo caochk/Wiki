@@ -373,7 +373,7 @@
     <section id="home">
       <div class="profile">
         <h2>炼气小修的知识库</h2>
-        <p>欢迎来到我的个人空间，和小修一起探索开发与算法的修仙世界！</p>
+        <p>欢迎来到我的个人空间，和小修一起探索开发与算法的修仙世界吧！</p>
       </div>
     </section>
     
@@ -664,18 +664,20 @@
         }, 600);
       });
       
-      // 添加导航链接平滑滚动
-      document.querySelectorAll('nav a').forEach(anchor => {
+      // 添加导航链接平滑滚动（仅对锚点链接生效）
+      document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
           
           const targetId = this.getAttribute('href');
           const targetElement = document.querySelector(targetId);
           
-          window.scrollTo({
-            top: targetElement.offsetTop - 80, // 考虑导航栏高度
-            behavior: 'smooth'
-          });
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80, // 考虑导航栏高度
+              behavior: 'smooth'
+            });
+          }
         });
       });
       
