@@ -111,13 +111,15 @@
     
     /* 添加导航栏样式 */
     nav {
-      background: rgba(58, 58, 43, 0.95);
+      background: rgba(58, 58, 43, 0.85); /* 调整背景透明度 */
       padding: 15px 0;
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(15px); /* 增强模糊效果 */
+      -webkit-backdrop-filter: blur(15px); /* Safari兼容 */
     }
     
     nav ul {
@@ -141,46 +143,28 @@
       padding: 8px 15px;
       border-radius: 4px;
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     
     nav a:hover {
       background: rgba(191, 169, 122, 0.5);
+      transform: translateY(-2px);
     }
     
-    /* 添加个人信息区域样式 */
-    .profile {
-      text-align: center;
-      margin: 30px 0;
-      padding: 20px;
-      background: rgba(246, 241, 231, 0.7);
-      border-radius: 10px;
-      border: 1px solid #bfa97a;
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #bfa97a;
+      transition: width 0.3s ease;
     }
     
-    .profile img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #bfa97a;
-      margin-bottom: 15px;
-    }
-    
-    .profile h2 {
-      color: #3a3a2b;
-      margin-bottom: 10px;
-      font-size: 1.8em;
-      border: none;
-      padding: 0;
-      background: none;
-      margin-top: 0;
-    }
-    
-    .profile p {
-      color: #2d2d2d;
-      font-size: 1.1em;
-      max-width: 600px;
-      margin: 10px auto;
+    nav a:hover::after {
+      width: 100%;
     }
     
     .container {
@@ -194,7 +178,26 @@
       position: relative;
       overflow: hidden;
       font-family: 'KaiTi', '楷体', 'STKaiti', '华文楷体', serif; /* 正文使用楷体 */
+      transition: all 0.3s ease;
     }
+    
+    .container:hover {
+      box-shadow: 0 16px 48px rgba(44,62,80,0.13), 0 3px 12px rgba(44,62,80,0.10);
+      border-color: #a68a5a;
+      transform: translateY(-5px);
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #b03a2e, #bfa97a, #2d5c3a);
+      z-index: 1;
+    }
+    
     .container:before {
       content: '';
       position: absolute;
@@ -204,13 +207,12 @@
       opacity: 0.13;
       pointer-events: none;
     }
-    .container:hover {
-      box-shadow: 0 16px 48px rgba(44,62,80,0.13), 0 3px 12px rgba(44,62,80,0.10);
-      border-color: #a68a5a;
-    }
+    
     h1, h2, h3 {
       font-family: 'LXGW WenKai Screen', 'ZCOOL XiaoWei', serif; /* 标题保持原有字体 */
+      position: relative;
     }
+    
     h1 {
       font-size: 2.8em;
       margin-bottom: 0.2em;
@@ -222,7 +224,9 @@
       z-index: 1;
       display: inline-block;
       width: 100%;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
+    
     .seal {
       display: inline-block;
       vertical-align: middle;
@@ -237,12 +241,21 @@
       box-shadow: 1px 2px 6px rgba(176,58,46,0.13);
       border: 2px solid #a62c1a;
       transform: rotate(-7deg);
+      animation: pulse 2s infinite;
     }
+    
+    @keyframes pulse {
+      0% { transform: rotate(-7deg) scale(1); }
+      50% { transform: rotate(-7deg) scale(1.05); }
+      100% { transform: rotate(-7deg) scale(1); }
+    }
+    
     h2, h3 {
       color: #2d5c3a;
       font-weight: bold;
       letter-spacing: 0.1em;
     }
+    
     h2 {
       font-size: 1.5em;
       margin-top: 2.2em;
@@ -250,12 +263,54 @@
       border-left: 6px solid #bfa97a;
       padding-left: 0.6em;
       background: linear-gradient(90deg, #f6e9d7 80%, #f6f1e7 100%);
+      position: relative;
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
     }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100px;
+      height: 2px;
+      background: #bfa97a;
+    }
+    
+    /* 为个人简介标题创建特殊样式，不显示底部线条 */
+    .profile h2 {
+      font-size: 1.8em;
+      border: none;
+      padding: 0;
+      background: none;
+      margin-top: 0;
+      margin-bottom: 15px;
+      position: relative;
+      color: #3a3a2b;
+    }
+    
+    .profile h2::after {
+      content: none; /* 移除底部线条 */
+    }
+    
     h3 {
       font-size: 1.13em;
       margin-top: 1.5em;
       margin-bottom: 0.5em;
+      position: relative;
+      padding-left: 15px;
     }
+    
+    h3::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: #bfa97a;
+      font-size: 0.8em;
+      top: 3px;
+    }
+    
     code, pre {
       background: #f7f2e3;
       border-radius: 4px;
@@ -263,21 +318,144 @@
       font-size: 0.98em;
       color: #b68900;
       font-family: 'KaiTi', '楷体', 'STKaiti', '华文楷体', monospace; /* 代码块也使用楷体 */
+      border: 1px solid #e6d5b8;
     }
+    
+    pre {
+      padding: 15px;
+      overflow-x: auto;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
     hr {
       border: none;
       border-top: 2px dashed #bfa97a;
       margin: 2.2em 0;
+      position: relative;
     }
+    
+    hr::after {
+      content: '☯';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f6f1e7;
+      padding: 0 10px;
+      color: #bfa97a;
+    }
+    
     ul, ol {
       margin-left: 1.5em;
     }
+    
+    li {
+      margin-bottom: 0.5em;
+      position: relative;
+    }
+    
+    ul li::before {
+      content: '•';
+      color: #bfa97a;
+      position: absolute;
+      left: -1.2em;
+      font-weight: bold;
+    }
+    
     strong {
       color: #a62c1a;
+      font-weight: bold;
     }
+    
     em {
       color: #2d5c3a;
     }
+    
+    a {
+      color: #2d5c3a;
+      text-decoration: none;
+      border-bottom: 1px dashed #2d5c3a;
+      transition: all 0.3s ease;
+    }
+    
+    a:hover {
+      color: #a62c1a;
+      border-bottom: 1px solid #a62c1a;
+    }
+    
+    /* 添加个人信息区域样式 */
+    .profile {
+      text-align: center;
+      margin: 30px 0;
+      padding: 30px;
+      background: rgba(246, 241, 231, 0.7);
+      border-radius: 10px;
+      border: 1px solid #bfa97a;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .profile:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #b03a2e, #bfa97a, #2d5c3a);
+    }
+    
+    .profile h2 {
+      color: #3a3a2b;
+      margin-bottom: 10px;
+      font-size: 1.8em;
+      border: none;
+      padding: 0;
+      background: none;
+      margin-top: 0;
+      margin-bottom: 15px; /* 添加一些底部边距 */
+    }
+    
+    .profile p {
+      color: #2d2d2d;
+      font-size: 1.1em;
+      max-width: 600px;
+      margin: 0 auto; /* 居中显示 */
+    }
+    
+    /* 联系方式样式 */
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    
+    .contact-list li {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      background: rgba(246, 241, 231, 0.5);
+      transition: all 0.3s ease;
+    }
+    
+    .contact-list li:hover {
+      background: rgba(191, 169, 122, 0.3);
+      transform: translateX(5px);
+    }
+    
+    .contact-list li::before {
+      content: '✉';
+      margin-right: 10px;
+      color: #bfa97a;
+    }
+    
     @media (max-width: 600px) {
       .container {
         padding: 10px 2px;
@@ -338,17 +516,6 @@
       }
     }
 
-    .trail-dot {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background-color: #2d5c3a;
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0.7;
-      z-index: 9996;
-    }
-    
     /* 章节样式 */
     section {
       scroll-margin-top: 100px;
@@ -373,7 +540,7 @@
     <section id="home">
       <div class="profile">
         <h2>炼气小修的知识库</h2>
-        <p>欢迎来到我的个人空间，和小修一起探索开发与算法的修仙世界吧！</p>
+        <p>欢迎来到我的个人空间，和小修一起探索开发与算法的修仙世界！</p>
       </div>
     </section>
     
@@ -385,9 +552,9 @@
       
       <h3>联系我</h3>
       <p>如果你对我的分享感兴趣，或者有任何问题和建议，欢迎通过以下方式联系我：</p>
-      <ul>
+      <ul class="contact-list">
         <li>GitHub: <a href="https://github.com/caochk" target="_blank">炼气小修</a></li>
-        <li>Email: <a href="mailto:caochk@gmail.com">给炼气小修发送传音符</a></li>
+        <li>Email: <a href="mailto:caochk@gmail.com">给炼器小修发送传音符</a></li>
       </ul>
     </section>
   </div>
@@ -401,7 +568,7 @@
       
       // 创建动态水印
       function createWatermark() {
-        const watermarkText = "炼气小修";
+        const watermarkText = "知识库";
         for (let i = 0; i < 20; i++) {
           const watermark = document.createElement('div');
           watermark.className = 'watermark';
@@ -611,42 +778,6 @@
           };
         }, 800);
       }
-      
-      // 鼠标移动追踪
-      document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        // 创建拖尾效果
-        const trailDot = document.createElement('div');
-        trailDot.className = 'trail-dot';
-        trailDot.style.left = `${mouseX}px`;
-        trailDot.style.top = `${mouseY}px`;
-        document.body.appendChild(trailDot);
-        
-        // 保存到轨迹数组
-        trail.push({
-          element: trailDot,
-          x: mouseX,
-          y: mouseY,
-          life: 20
-        });
-        
-        // 移除过期的轨迹点
-        if (trail.length > trailLength) {
-          const oldDot = trail.shift();
-          if (oldDot.element.parentNode) {
-            oldDot.element.parentNode.removeChild(oldDot.element);
-          }
-        }
-        
-        // 更新轨迹点透明度
-        trail.forEach((dot, index) => {
-          dot.life--;
-          const opacity = dot.life / 20;
-          dot.element.style.opacity = opacity;
-        });
-      });
       
       // 鼠标点击效果
       document.addEventListener('click', function(e) {
